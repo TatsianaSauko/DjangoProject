@@ -40,13 +40,13 @@
     <div id="topmenu">
         <ul>
             <li>
-                <a href="#">ГЛАВНАЯ</a>
+                <a href="{% url 'shop:product_list' %}">ГЛАВНАЯ</a>
             </li>
             <li>
                 <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
             </li>
             <li>
-                <a href="#">ОПЛАТА И ДОСТАВКА</a>
+                <a href="{% url 'shop:delivery' %}">ОПЛАТА И ДОСТАВКА</a>
             </li>
             <li>
                 <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
