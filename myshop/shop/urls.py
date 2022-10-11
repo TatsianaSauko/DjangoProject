@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:id>/<slug:slug>/', views.product_detail,
          name='product_detail'),
     path('delivery', views.delivery, name='delivery'),
+    path('contacts', views.contacts, name='contacts'),
 ]

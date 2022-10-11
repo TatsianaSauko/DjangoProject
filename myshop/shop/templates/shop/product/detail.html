@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             <p>
-                               <form action="#" method="post">
+                               <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                 {{ cart_product_form }}
                                 {% csrf_token %}
                             <table>
