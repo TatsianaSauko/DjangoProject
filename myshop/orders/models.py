@@ -1,4 +1,6 @@
 from django.db import models
+
+from coupons.models import Coupon
 from shop.models import Product
 from decimal import Decimal
 from django.core.validators import MinValueValidator, \
@@ -16,6 +18,14 @@ class Order(models.Model):
     need_delivery = models.BooleanField(verbose_name='Доставка')
     notice = models.TextField(blank=True, verbose_name='Примечание к заказу')
     paid = models.BooleanField(default=False, verbose_name='Оплата')
+    coupon = models.ForeignKey(Coupon,
+                               related_name='orders',
+                               null=True,
+                               blank=True,
+                               on_delete=models.SET_NULL, verbose_name="Купон")
+    discount = models.IntegerField(default=0,
+                                   validators=[MinValueValidator(0),
+                                               MaxValueValidator(100)], verbose_name="Скидка")
     STATUSES = [
         ('NEW', 'Новый заказ'),
         ('APR', 'Подтверждён'),
@@ -42,7 +52,8 @@ class Order(models.Model):
         return display
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return round(total_cost - total_cost * (self.discount / Decimal('100')), 2)
 
     display_products.short_description = 'Состав заказа'
     get_total_cost.short_description = 'Сумма'

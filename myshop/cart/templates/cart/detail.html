@@ -67,7 +67,27 @@
         </tr>
         {% endwith %}
         {% endfor %}
+        <tr id="discount">
+            <td class="cart_left"></td>
+            <td colspan="6">
+                 <form action="{% url 'coupons:apply' %}" method="post">
+                <table>
+                    <tr>
 
+                        </td>
+                            {{ coupon_apply_form }}
+                            {% csrf_token %}
+                        <td>
+                            {% load static %}
+                            <input type="submit" value="Применить">
+                        </td>
+
+                    </tr>
+                </table>
+                     </form>
+            </td>
+            <td class="cart_right"></td>
+        </tr>
         <tr id="summa">
             <td class="cart_left"></td>
             <td colspan="6">
