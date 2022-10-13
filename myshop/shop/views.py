@@ -1,6 +1,8 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from cart.forms import CartAddProductForm
+from .forms import SearchForm
 
 
 def product_list(request, category_slug=None):
@@ -56,3 +58,20 @@ def product_detail(request, id, slug):
 
 def handler404(request, exception):
     return render(request, '404.html', status=404)
+
+
+def search(request):
+    search_form = SearchForm(request.GET)
+    if search_form.is_valid():
+        q = search_form.cleaned_data['q']
+        products = Product.objects.filter(
+            Q(name__icontains=q) | Q(year__icontains=q) | Q(
+                author__icontains=q) |
+            Q(description__icontains=q)
+        )
+        context = {'products': products, 'q': q}
+        return render(
+            request,
+            'shop/search.html',
+            context=context
+        )

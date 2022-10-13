@@ -61,12 +61,12 @@
             </li>
         </ul>
         <div id="search">
-            <form name="search" action="#" method="get">
+            <form name="search" action="{% url 'shop:search' %}" method="get">
                 <table>
                     <tr>
                         <td class="input_left"></td>
                         <td>
-
+                            {{ search_form.q }}
                         </td>
                         <td class="input_right"></td>
                     </tr>
