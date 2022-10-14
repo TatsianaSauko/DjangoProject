@@ -94,18 +94,18 @@
                     <h3>Пользователь</h3>
                 </div>
                 <div class="items">
-
+                    {% if user.is_authenticated %}
                     <p>
-                        <a href="#">Заказы</a>
+                        <a href="">Заказы</a>
                     </p>
                     <p>
-                        <a href="#">Выход</a>
+                        <a href="{% url 'account:logout' %}?next={{ request.path }}">Выход</a>
                     </p>
-
+                    {% else %}
                     <p>
-                        <a href="#">Вход</a>
+                        <a href="{% url 'account:login' %}?next={{ request.path }}">Вход</a>
                     </p>
-
+                    {% endif %}
                 </div>
                 <div class="bottom"></div>
             </div>
