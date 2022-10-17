@@ -104,7 +104,7 @@
                 <div class="items">
                     {% if user.is_authenticated %}
                      <p>
-                        <a href="#">Заказы</a>
+                        <a href="{% url 'orders:orders' %}">Заказы</a>
                     </p>
                     <p>
                         <a href="{% url 'logout' %}?next={{ request.path }}">Выход</a>

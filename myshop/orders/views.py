@@ -1,10 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.template.loader import get_template
-from .models import OrderItem
-from .forms import OrderCreateForm
+from django.urls import reverse
+
 from cart.cart import Cart
+from .models import OrderItem, Order
+from .forms import OrderCreateForm
 from .tasks import order_created
 
 
@@ -63,3 +67,22 @@ def add_user(name, email):
     msg = EmailMultiAlternatives(subject, text_content, from_email, [email])
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
+
+
+@login_required
+def orders(request):
+    user_orders = Order.objects.filter(email__exact=request.user.email)
+    return render(
+        request,
+        'orders/order/orders.html',
+        context={'orders': user_orders}
+    )
+
+
+@login_required
+def cancelorder(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if order.email == request.user.email and order.status == 'NEW':
+        order.status = 'CNL'
+        order.save()
+    return HttpResponseRedirect(reverse('orders:orders'))
