@@ -15,3 +15,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['available', 'created', 'updated']
     list_editable = ['price', 'available']
     prepopulated_fields = {'slug': ('name',)}
+    actions_on_bottom = True
+    list_per_page = 5
+    search_fields = ('name', 'author')

@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.core.mail import EmailMultiAlternatives
@@ -86,3 +87,11 @@ def cancelorder(request, order_id):
         order.status = 'CNL'
         order.save()
     return HttpResponseRedirect(reverse('orders:orders'))
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request,
+                  'admin/orders/order/detail.html',
+                  {'order': order})
