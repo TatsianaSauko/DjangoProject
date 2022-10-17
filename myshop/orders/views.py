@@ -2,7 +2,6 @@ from django.contrib.auth.models import User, Group
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render
 from django.template.loader import get_template
-
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
@@ -64,4 +63,3 @@ def add_user(name, email):
     msg = EmailMultiAlternatives(subject, text_content, from_email, [email])
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
-

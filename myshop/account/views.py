@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.models import Group
-
 from account.forms import UserRegistrationForm
 
 

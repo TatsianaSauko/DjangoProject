@@ -15,7 +15,7 @@
         {{ user_form.as_p }}
         <input type="submit" value="Регистрация" />
     </form>
-    <p><a href="">Войти</a></p>
-    <p><a href="">Восстановить пароль</a></p>
+    <p><a href="{% url 'login' %}">Войти</a></p>
+    <p><a href="{% url 'password_reset' %}">Восстановить пароль</a></p>
 </div>
 {% endblock %}
