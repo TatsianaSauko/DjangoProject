@@ -91,15 +91,7 @@
             </div>
             <div class="menu">
                 <div class="header">
-                    {% if user.is_authenticated %}
-                    {% if user.first_name %}
-                    <h3>{{ user.first_name }} </h3>
-                    {% else %}
-                    <h3>{{ user.email }} </h3>
-                    {% endif %}
-                    {% else %}
                     <h3>Пользователь</h3>
-                    {% endif %}
                 </div>
                 <div class="items">
                     {% if user.is_authenticated %}

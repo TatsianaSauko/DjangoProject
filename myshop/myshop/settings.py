@@ -81,13 +81,22 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'online_shop',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -148,5 +157,5 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1040237009351-8g13e9oejgmtape7ps4d10odlks33ggh.apps.googleusercontent.com' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Consumer Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'xxx'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xxx'
